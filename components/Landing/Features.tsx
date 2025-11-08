@@ -1,105 +1,78 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Zap, Users, Video, Brain, BarChart3, Lock } from 'lucide-react'
+import { Brain, Zap, Video } from 'lucide-react'
 
 export default function Features() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  }
-
   const features = [
     {
+      icon: Brain,
+      title: 'AI Candidate Screening:',
+      description: 'Automatically filters rates profiles using video video + data intelligence.',
+      color: 'from-cyan-400 to-cyan-600',
+    },
+    {
       icon: Zap,
-      title: 'Instant Matching',
-      description: 'AI-powered algorithm instantly matches candidates to jobs in seconds, not weeks',
-      color: 'from-yellow-500 to-orange-500',
+      title: 'Instant Match Engine:',
+      description: 'Matches employers with pre-pre-screened candidates in under 30 minutes.',
+      color: 'from-cyan-400 to-cyan-600',
     },
     {
       icon: Video,
-      title: 'Video Resumes',
-      description: 'Record or upload video introductions to showcase personality and communication skills',
-      color: 'from-purple-500 to-pink-500',
-    },
-    {
-      icon: Brain,
-      title: 'AI Screening',
-      description: 'Advanced AI evaluates candidates on technical skills, soft skills, and cultural fit',
-      color: 'from-blue-500 to-cyan-500',
-    },
-    {
-      icon: Users,
-      title: 'Network Building',
-      description: 'Connect with professionals, follow companies, and build meaningful relationships',
-      color: 'from-green-500 to-emerald-500',
-    },
-    {
-      icon: BarChart3,
-      title: 'Smart Analytics',
-      description: 'Real-time insights on hiring metrics, candidate pipeline, and hiring trends',
-      color: 'from-red-500 to-pink-500',
-    },
-    {
-      icon: Lock,
-      title: 'Secure & Private',
-      description: 'Enterprise-grade security with end-to-end encryption and GDPR compliance',
-      color: 'from-indigo-500 to-purple-500',
+      title: 'Video Resume Platform',
+      description: 'Candidates express their personality, not just skills.',
+      color: 'from-cyan-400 to-cyan-600',
     },
   ]
 
   return (
-    <section className="py-20 md:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <section className="py-20 md:py-32 bg-[#0a0e27] relative overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-32 bg-cyan-500/20 rounded-full filter blur-[100px]"></div>
+
+      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Powerful Features for Modern Hiring
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            The AI Hiring Engine that Never Sleeps
           </h2>
-          <p className="text-xl text-gray-600">
-            Everything you need to find, assess, and hire top talent faster
+          <p className="text-xl text-gray-300">
+            Powered multi-agent intelligence — automating, screening, and selection.
           </p>
         </motion.div>
 
         {/* Features Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, i) => (
             <motion.div
               key={i}
-              variants={itemVariants}
-              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)' }}
-              className="p-8 rounded-2xl border-2 border-gray-100 hover:border-primary-300 transition-all bg-gradient-to-br from-white to-gray-50"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.2, duration: 0.6 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10 }}
+              className="group relative"
             >
-              <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6`}>
-                <feature.icon className="w-7 h-7 text-white" />
+              {/* Card */}
+              <div className="relative bg-gradient-to-b from-slate-900/50 to-slate-900/30 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-8 h-full transition-all duration-300 group-hover:border-cyan-400/60 group-hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]">
+                {/* Icon */}
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-400/20 to-cyan-600/20 border border-cyan-400/40 flex items-center justify-center mb-6">
+                  <feature.icon className="w-8 h-8 text-cyan-400" />
+                </div>
+
+                {/* Content */}
+                <h3 className="text-xl font-bold text-white mb-4">{feature.title}</h3>
+                <p className="text-gray-300 leading-relaxed">{feature.description}</p>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
